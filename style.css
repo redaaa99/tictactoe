@@ -1,0 +1,49 @@
+*{
+	margin 0;
+}
+
+body{
+  	background: red; /* For browsers that do not support gradients */
+ 	background: -webkit-linear-gradient(left,#c6d7f2,white); /*Safari 5.1-6*/
+  	background: -o-linear-gradient(right,#c6d7f2,white); /*Opera 11.1-12*/
+  	background: -moz-linear-gradient(right,#c6d7f2,white); /*Fx 3.6-15*/
+  	background: linear-gradient(to right, #c6d7f2, white);
+  	background-size: cover;
+  	text-align: center;
+}
+
+h1{
+}
+#tic{
+	color:#0C4700;
+	font-family: 'PT Sans', sans-serif;
+}
+#tac{
+	color:#216A12;
+	font-family: 'PT Sans', sans-serif;
+}
+#toe{
+	color:#68B159;
+	font-family: 'PT Sans', sans-serif;
+}
+
+#container{
+	margin: 0 auto;
+	height: 450px;
+	width :450px;
+	background-color: rgba(66, 161, 244,0.4);
+	display: flex;
+	flex-wrap: wrap;
+	border:1px black solid;
+	border-radius: 5px;
+}
+
+.tile{
+	border:1px black solid;
+	width: 148px;
+	font-size : 70pt;
+	vertical-align: middle;
+}
+i{
+	vertical-align: middle;
+}
