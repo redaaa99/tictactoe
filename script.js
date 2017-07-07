@@ -1,6 +1,7 @@
 scorex=0;
 scoreo=0;
 turn="x";
+choice="";
 
 var gameArray=["_","_","_","_","_","_","_","_","_"];
 
@@ -76,6 +77,24 @@ function checkwin(array_tic)
 		winner = sign;
 	}
 	
+	
+	
+	if(winner=="x")
+	{
+		scorex++;
+		gameArray=["_","_","_","_","_","_","_","_","_"];
+		declareWinner("x");
+		displayScore();
+		return;
+	}
+	else if(winner=="o")
+	{
+		scoreo++;
+		gameArray=["_","_","_","_","_","_","_","_","_"];
+		declareWinner("o");
+		displayScore();
+		return;
+	}
 	c=0;
 	for(i=0;i<9;i++)
 	{
@@ -88,21 +107,54 @@ function checkwin(array_tic)
 	{
 		winner="draw";
 		gameArray=["_","_","_","_","_","_","_","_","_"];
-	}
-	//declareWinner(winner); TODO
-	
-	if(winner=="x")
+		declareWinner("draw");
+		displayScore();
+		return;
+	}	
+}
+
+function declareWinner(name)
+{
+	if(name=="x")
 	{
-		scorex++;
-		gameArray=["_","_","_","_","_","_","_","_","_"];
+		statement = "X Wins !";
 	}
-	else if(winner=="o")
+	else if(name=="o")
 	{
-		scoreo++;
-		gameArray=["_","_","_","_","_","_","_","_","_"];
+		statement = "O Wins !";
 	}
-	displayTable(gameArray);
-	displayScore();
+	else
+	{
+		statement = "A Draw !";
+	}
+	$("#Winner").text(statement);
+	$("#disp").css("visibility","visible");
+	$("#WinDisplay").css("visibility","visible");
+	$("#WinDisplay").animate({
+		width:'450px',
+		// height:'450px',
+	},1000,function(){
+		$("#disp").animate({
+		    opacity:1,
+		  },400);
+		$( "#WinDisplay" ).animate({
+		    width:'450px',
+		    // height:'450px',
+		  },1500,function(){
+		  	displayTable(gameArray);
+		  	$("#disp").animate({
+		    opacity:0,
+			},400);
+		  	$( "#WinDisplay" ).animate({
+
+		    width:'0px',
+		    // height:'0px',
+		  },1000,function(){
+		  	$("#disp").css("visibility","hidden");
+
+		  })
+		  })
+	});
 }
 
 function displayTable(array_tic)
@@ -151,7 +203,8 @@ function put(num)
 	checkwin(gameArray);
 }
 
-function clearall() {
+function clearall() 
+{
     for (var i =0; i<9; i++) 
     {
     	$(".tile")[i].innerHTML="";
@@ -163,3 +216,26 @@ function clearall() {
     displayScore();
 }
 
+function back(){
+	clearall();
+	$("#choice").css("visibility","visible");
+	$("#realContainer").css("visibility","hidden");
+}
+
+function onePlayer(){
+	choice="one";
+	$("#choice").css("visibility","hidden");
+	$("#realContainer").css("visibility","visible");
+	// TODO : random turn
+	// TODO : check for best move or random move
+	// TODO : put(move)
+	// TODO : wait for player to click
+	// TODO : again check ... 
+	// TODO : if there is winner stop.
+}
+
+function twoPlayer(){
+	choice="two";
+	$("#choice").css("visibility","hidden");
+	$("#realContainer").css("visibility","visible");
+}

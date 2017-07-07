@@ -9,20 +9,52 @@
 </head>
 <body>
 <h1><span id="tic">TIC</span><span id="tac"> TAC</span><span id="toe"> TOE</span></h1>
-<div id="scoreboard"><span id="displayscore"> X's Score : <span id="SCOREX">0</span></span><span id="displayscore">O's Score : <span id="SCOREO">0</span></span></div>
-<div id="container">
-	<div class="tile" id="0" onclick="put(0)"></div>
-	<div class="tile" id="1" onclick="put(1)"></div>
-	<div class="tile" id="2" onclick="put(2)"></div>
-	<div class="tile" id="3" onclick="put(3)"></div>
-	<div class="tile" id="4" onclick="put(4)"></div>
-	<div class="tile" id="5" onclick="put(5)"></div>
-	<div class="tile" id="6" onclick="put(6)"></div>
-	<div class="tile" id="7" onclick="put(7)"></div>
-	<div class="tile" id="8" onclick="put(8)"></div>
+<div id="choice">
+		<div id="OnePlayer" onmouseup="onePlayer();">One Player</div>
+		<div id="TwoPlayer" onmouseup="twoPlayer();">Two Players</div>
 </div>
-<br>
-<button id="button" onclick="clearall()">RESET</button>
+<div id="realContainer">
+	<div id="scoreboard"><span id="displayscore"> X's Score : <span id="SCOREX">0</span></span><span id="displayscore">O's Score : <span id="SCOREO">0</span></span></div>
+
+
+	<div id="container">
+		<div id="WinDisplay" >
+		<span id="disp">
+			GAME OVER<br><br><br>
+			<span id="Winner">X Wins !</span>
+		</span>
+		</div>
+		<div class="tile" id="0" onclick="put(0)"></div>
+		<div class="tile" id="1" onclick="put(1)"></div>
+		<div class="tile" id="2" onclick="put(2)"></div>
+		<div class="tile" id="3" onclick="put(3)"></div>
+		<div class="tile" id="4" onclick="put(4)"></div>
+		<div class="tile" id="5" onclick="put(5)"></div>
+		<div class="tile" id="6" onclick="put(6)"></div>
+		<div class="tile" id="7" onclick="put(7)"></div>
+		<div class="tile" id="8" onclick="put(8)"></div>	
+
+
+	</div>
+
+	<br>
+
+
+
+<button id="button" onclick="clearall()"><span>RESET</span></button>
+<button id="button" onclick="back()"><span>BACK</span></button>
+
+</div>
+
+
+
+
+
+
+
+
+
+
 <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
