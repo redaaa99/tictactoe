@@ -5,23 +5,28 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
 </head>
 <body>
 <h1><span id="tic">TIC</span><span id="tac"> TAC</span><span id="toe"> TOE</span></h1>
-<p><span>X's Score : <span id="SCOREX">0</span></span> |  <span>O's Score : <span id="SCOREO">0</span></span></p>
+<div id="scoreboard"><span id="displayscore"> X's Score : <span id="SCOREX">0</span></span><span id="displayscore">O's Score : <span id="SCOREO">0</span></span></div>
 <div id="container">
-	<div class="tile" id="0"><i class="fa fa-times" aria-hidden="true"></i></div>
-	<div class="tile" id="1"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-	<div class="tile" id="2"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-	<div class="tile" id="3"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-	<div class="tile" id="4"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-	<div class="tile" id="5"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-	<div class="tile" id="6"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-	<div class="tile" id="7"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
-	<div class="tile" id="8"><i class="fa fa-circle-o" aria-hidden="true"></i></div>
+	<div class="tile" id="0" onclick="put(0)"></div>
+	<div class="tile" id="1" onclick="put(1)"></div>
+	<div class="tile" id="2" onclick="put(2)"></div>
+	<div class="tile" id="3" onclick="put(3)"></div>
+	<div class="tile" id="4" onclick="put(4)"></div>
+	<div class="tile" id="5" onclick="put(5)"></div>
+	<div class="tile" id="6" onclick="put(6)"></div>
+	<div class="tile" id="7" onclick="put(7)"></div>
+	<div class="tile" id="8" onclick="put(8)"></div>
 </div>
 <br>
-<button>RESET</button>
-
+<button id="button" onclick="clearall()">RESET</button>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="script.js" ></script>
 </body>
 </html>
