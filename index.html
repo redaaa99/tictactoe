@@ -9,10 +9,19 @@
 </head>
 <body>
 <h1><span id="tic">TIC</span><span id="tac"> TAC</span><span id="toe"> TOE</span></h1>
+
 <div id="choice">
 		<div id="OnePlayer" onmouseup="onePlayer();">One Player</div>
 		<div id="TwoPlayer" onmouseup="twoPlayer();">Two Players</div>
 </div>
+<div id="choosexo">
+	<div id="playas" >Play As:</div>
+	<button id="buttonx" onmouseup="playAsX();"><span>X</span></button>
+    <button id="buttonx" onmouseup="playAsO();"><span>O</span></button>
+    <br>
+    <button id="button" onclick="back()"><span>BACK</span></button>
+</div>
+
 <div id="realContainer">
 	<div id="scoreboard"><span id="displayscore"> X's Score : <span id="SCOREX">0</span></span><span id="displayscore">O's Score : <span id="SCOREO">0</span></span></div>
 
@@ -36,6 +45,7 @@
 
 
 	</div>
+
 
 	<br>
 

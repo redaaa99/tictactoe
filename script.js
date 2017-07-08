@@ -1,6 +1,6 @@
-scorex=0;
-scoreo=0;
-turn="x";
+var scorex=0;
+var scoreo=0;
+var turn="x";
 choice="";
 
 var gameArray=["_","_","_","_","_","_","_","_","_"];
@@ -185,22 +185,75 @@ function displayScore()
 
 function put(num)
 {
-	if(gameArray[num]!="x" && gameArray[num]!="o")
+	if(choice!="one")
 	{
-		if(turn=="x")
+		if(gameArray[num]!="x" && gameArray[num]!="o")
 		{
-			gameArray[num]="x";
-			turn ="o";
+			if(turn=="x")
+			{
+				gameArray[num]="x";
+				turn ="o";
+			}
+			else
+			{
+				gameArray[num]="o";
+				turn ="x";
+			}
 		}
-		else
-		{
-			gameArray[num]="o";
-			turn ="x";
-		}
+		displayTable(gameArray);
+		checkwin(gameArray);
 	}
+	else
+	{
+		
+			if(gameArray[num]!="x" && gameArray[num]!="o")
+			{
+				if(turn=="x")
+				{
+					gameArray[num]="x";
+					turn ="o";
+				}
+				else
+				{
+					gameArray[num]="o";
+					turn ="x";
+				}
+			}
+		c=0;
+		for(i=0;i<9;i++)
+		{
+			if(gameArray[i]!="_")
+			{
+				c++;
+			}
+		}
+		if(turn==computer && c<=8)
+		{
+			
+			tile_choice=Math.floor((Math.random() * 9) + 1)-1;
+			while(!isSpotAvailable(tile_choice))
+			{
+				tile_choice=Math.floor((Math.random() * 9) + 1)-1;
+			}
+			if(turn=="x")
+			{
+				gameArray[tile_choice]="x";
+				turn ="o";
+			}
+			else
+			{
+				gameArray[tile_choice]="o";
+				turn ="x";
+			}
+		}	
+		displayTable(gameArray);
+		checkwin(gameArray);
+	}
+	
 
-	displayTable(gameArray);
-	checkwin(gameArray);
+	
+	
+	
 }
 
 function clearall() 
@@ -217,25 +270,71 @@ function clearall()
 }
 
 function back(){
-	clearall();
 	$("#choice").css("visibility","visible");
+	document.getElementById("choice").style.opacity="1";
+	$("#choosexo").css("visibility","hidden");
+	document.getElementById("choosexo").style.opacity="0";
 	$("#realContainer").css("visibility","hidden");
+	document.getElementById("realContainer").style.opacity="0";
+
+	clearall();
 }
 
 function onePlayer(){
 	choice="one";
 	$("#choice").css("visibility","hidden");
-	$("#realContainer").css("visibility","visible");
-	// TODO : random turn
-	// TODO : check for best move or random move
-	// TODO : put(move)
-	// TODO : wait for player to click
-	// TODO : again check ... 
-	// TODO : if there is winner stop.
+	document.getElementById("choice").style.opacity="0";
+	$("#choosexo").css("visibility","visible");
+	document.getElementById("choosexo").style.opacity="1";
 }
 
 function twoPlayer(){
 	choice="two";
 	$("#choice").css("visibility","hidden");
+	document.getElementById("choice").style.opacity="0";
+	$("#choosexo").css("visibility","visible");
+	document.getElementById("choosexo").style.opacity="1";
+
+}
+
+function playAsX(){
 	$("#realContainer").css("visibility","visible");
+	document.getElementById("realContainer").style.opacity="1";
+	$("#choosexo").css("visibility","hidden");
+	document.getElementById("choosexo").style.opacity="0";
+	turn="x";
+	if(choice=="one")
+	{
+		computer="o";
+	}
+}
+
+function playAsO(){
+	$("#choosexo").css("visibility","hidden");
+	document.getElementById("choosexo").style.opacity="0";
+	$("#realContainer").css("visibility","visible");
+	document.getElementById("realContainer").style.opacity="1";
+	turn="o";
+	if(choice=="one")
+	{
+		computer="x";
+	}
+}
+
+// function do_best_move()
+// {
+	
+// 	put(tile_choice);
+// }
+
+function isSpotAvailable(num)
+{
+	if(gameArray[num]=="_")
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
