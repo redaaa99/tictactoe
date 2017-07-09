@@ -3,12 +3,14 @@ var scoreo=0;
 var turn="x";
 choice="";
 
+
 var gameArray=["_","_","_","_","_","_","_","_","_"];
 
 
 function checkwin(array_tic)
 {
 	winner = "none";
+	displayTable(gameArray);
 	/* TODO : OPTIMIZE THESE 16 IF's*/
 	sign="x";
 	if(array_tic[0]==sign && array_tic[1]==sign && array_tic[2]==sign)
@@ -85,7 +87,7 @@ function checkwin(array_tic)
 		gameArray=["_","_","_","_","_","_","_","_","_"];
 		declareWinner("x");
 		displayScore();
-		return;
+		return true;
 	}
 	else if(winner=="o")
 	{
@@ -93,7 +95,7 @@ function checkwin(array_tic)
 		gameArray=["_","_","_","_","_","_","_","_","_"];
 		declareWinner("o");
 		displayScore();
-		return;
+		return true;
 	}
 	c=0;
 	for(i=0;i<9;i++)
@@ -109,7 +111,7 @@ function checkwin(array_tic)
 		gameArray=["_","_","_","_","_","_","_","_","_"];
 		declareWinner("draw");
 		displayScore();
-		return;
+		return true;
 	}	
 }
 
@@ -142,6 +144,7 @@ function declareWinner(name)
 		    // height:'450px',
 		  },1500,function(){
 		  	displayTable(gameArray);
+		  	play();
 		  	$("#disp").animate({
 		    opacity:0,
 			},400);
@@ -151,6 +154,7 @@ function declareWinner(name)
 		    // height:'0px',
 		  },1000,function(){
 		  	$("#disp").css("visibility","hidden");
+
 
 		  })
 		  })
@@ -206,19 +210,32 @@ function put(num)
 	else
 	{
 		
-			if(gameArray[num]!="x" && gameArray[num]!="o")
+		if(gameArray[num]!="x" && gameArray[num]!="o")
+		{
+			if(turn=="x")
 			{
-				if(turn=="x")
-				{
-					gameArray[num]="x";
-					turn ="o";
-				}
-				else
-				{
-					gameArray[num]="o";
-					turn ="x";
-				}
+				gameArray[num]="x";
+				turn ="o";
 			}
+			else
+			{
+				gameArray[num]="o";
+				turn ="x";
+			}
+		}
+		win = checkwin(gameArray);
+		if(win)
+		{
+			if(turn=="x")
+			{	
+				turn ="o";
+			}
+			else
+			{
+				turn ="x";
+			}
+			return;
+		}
 		c=0;
 		for(i=0;i<9;i++)
 		{
@@ -229,12 +246,13 @@ function put(num)
 		}
 		if(turn==computer && c<=8)
 		{
-			
+			//make a function that return a TILE based on COMPUTER symbol 
 			tile_choice=Math.floor((Math.random() * 9) + 1)-1;
 			while(!isSpotAvailable(tile_choice))
 			{
 				tile_choice=Math.floor((Math.random() * 9) + 1)-1;
 			}
+			// So we should replace this block
 			if(turn=="x")
 			{
 				gameArray[tile_choice]="x";
@@ -265,7 +283,6 @@ function clearall()
     scorex=0;
     scoreo=0;
     gameArray=["_","_","_","_","_","_","_","_","_"];
-    turn="x";
     displayScore();
 }
 
@@ -286,6 +303,7 @@ function onePlayer(){
 	document.getElementById("choice").style.opacity="0";
 	$("#choosexo").css("visibility","visible");
 	document.getElementById("choosexo").style.opacity="1";
+	
 }
 
 function twoPlayer(){
@@ -303,9 +321,17 @@ function playAsX(){
 	$("#choosexo").css("visibility","hidden");
 	document.getElementById("choosexo").style.opacity="0";
 	turn="x";
+	playerchoice="x";
 	if(choice=="one")
 	{
 		computer="o";
+		random_start=Math.floor((Math.random() * 2) + 1);
+		if(random_start==1)
+		{	
+			tile_choice=Math.floor((Math.random() * 9) + 1)-1;
+			gameArray[tile_choice]="o";
+			displayTable(gameArray);
+		}
 	}
 }
 
@@ -315,17 +341,53 @@ function playAsO(){
 	$("#realContainer").css("visibility","visible");
 	document.getElementById("realContainer").style.opacity="1";
 	turn="o";
+	playerchoice="o";
 	if(choice=="one")
 	{
 		computer="x";
+		random_start=Math.floor((Math.random() * 2) + 1);
+		if(random_start==1)
+		{	
+			tile_choice=Math.floor((Math.random() * 9) + 1)-1;
+			gameArray[tile_choice]="x";
+			displayTable(gameArray);
+		}
 	}
 }
-
+//TODO::!!!!
 // function do_best_move()
 // {
-	
-// 	put(tile_choice);
+		//return tile_choice;
 // }
+
+
+function play(){
+	if(choice=="one")
+		{
+			random_start=Math.floor((Math.random() * 2) + 1);
+			if(playerchoice=="o")
+			{
+				computer="x";
+				
+				if(random_start==1)
+				{	
+					tile_choice=Math.floor((Math.random() * 9) + 1)-1;
+					gameArray[tile_choice]="x";
+					displayTable(gameArray);
+				}
+			}
+			else
+			{
+				computer="o";
+				if(random_start==1)
+				{	
+					tile_choice=Math.floor((Math.random() * 9) + 1)-1;
+					gameArray[tile_choice]="o";
+					displayTable(gameArray);
+				}
+			}
+		}
+}
 
 function isSpotAvailable(num)
 {
