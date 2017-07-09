@@ -2,6 +2,7 @@ var scorex=0;
 var scoreo=0;
 var turn="x";
 choice="";
+computer_choice="";
 
 
 var gameArray=["_","_","_","_","_","_","_","_","_"];
@@ -161,6 +162,7 @@ function declareWinner(name)
 	});
 }
 
+
 function displayTable(array_tic)
 {
 	for (j=0; j<9; j++) 
@@ -246,13 +248,14 @@ function put(num)
 		}
 		if(turn==computer && c<=8)
 		{
-			//make a function that return a TILE based on COMPUTER symbol 
-			tile_choice=Math.floor((Math.random() * 9) + 1)-1;
-			while(!isSpotAvailable(tile_choice))
-			{
-				tile_choice=Math.floor((Math.random() * 9) + 1)-1;
-			}
-			// So we should replace this block
+			//make a function that return a TILE based on COMPUTER symbol
+			tile_choice = do_best_move();
+			// tile_choice=Math.floor((Math.random() * 9) + 1)-1;
+			// while(!isSpotAvailable(tile_choice))
+			// {
+			// 	tile_choice=Math.floor((Math.random() * 9) + 1)-1;
+			// }
+			// // So we should replace this block
 			if(turn=="x")
 			{
 				gameArray[tile_choice]="x";
@@ -263,6 +266,7 @@ function put(num)
 				gameArray[tile_choice]="o";
 				turn ="x";
 			}
+
 		}	
 		displayTable(gameArray);
 		checkwin(gameArray);
@@ -322,6 +326,7 @@ function playAsX(){
 	document.getElementById("choosexo").style.opacity="0";
 	turn="x";
 	playerchoice="x";
+	computer_choice="o";
 	if(choice=="one")
 	{
 		computer="o";
@@ -329,7 +334,7 @@ function playAsX(){
 		if(random_start==1)
 		{	
 			tile_choice=Math.floor((Math.random() * 9) + 1)-1;
-			gameArray[tile_choice]="o";
+			gameArray[4]="o";
 			displayTable(gameArray);
 		}
 	}
@@ -342,6 +347,7 @@ function playAsO(){
 	document.getElementById("realContainer").style.opacity="1";
 	turn="o";
 	playerchoice="o";
+	computer_choice="x";
 	if(choice=="one")
 	{
 		computer="x";
@@ -355,10 +361,38 @@ function playAsO(){
 	}
 }
 //TODO::!!!!
-// function do_best_move()
-// {
-		//return tile_choice;
-// }
+function do_best_move()
+{	
+
+	if(gameArray.join("")=="____"+playerchoice+"____")
+	{
+		ran = Math.floor((Math.random() * 4) + 1);
+		if(ran==1)
+		{
+			return 2;
+		}
+		else if(ran==2)
+		{
+			return 0;
+		}
+		else if(ran==2)
+		{
+			return 8;
+		}
+		else
+		{
+			return 6;
+		}
+	}
+	else if(gameArray.join("")==playerchoice+"________" || gameArray.join("")=="_"+playerchoice+"_______" || 
+	gameArray.join("")=="__"+playerchoice+"______" || )
+	tile_choice=Math.floor((Math.random() * 9) + 1)-1;
+	while(!isSpotAvailable(tile_choice))
+	{
+		tile_choice=Math.floor((Math.random() * 9) + 1)-1;
+	}
+	return tile_choice;
+}
 
 
 function play(){
@@ -372,7 +406,7 @@ function play(){
 				if(random_start==1)
 				{	
 					tile_choice=Math.floor((Math.random() * 9) + 1)-1;
-					gameArray[tile_choice]="x";
+					gameArray[4]="x";
 					displayTable(gameArray);
 				}
 			}
@@ -382,7 +416,7 @@ function play(){
 				if(random_start==1)
 				{	
 					tile_choice=Math.floor((Math.random() * 9) + 1)-1;
-					gameArray[tile_choice]="o";
+					gameArray[4]="o";
 					displayTable(gameArray);
 				}
 			}
