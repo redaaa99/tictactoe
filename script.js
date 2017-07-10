@@ -333,8 +333,23 @@ function playAsX(){
 		random_start=Math.floor((Math.random() * 2) + 1);
 		if(random_start==1)
 		{	
-			tile_choice=Math.floor((Math.random() * 9) + 1)-1;
-			gameArray[4]="o";
+			ran = Math.floor((Math.random() * 4) + 1);
+			if(ran==1)
+			{
+				gameArray[2]="o";
+			}
+			else if(ran==2)
+			{
+				gameArray[0]="o";
+			}
+			else if(ran==2)
+			{
+				gameArray[8]="o";
+			}
+			else
+			{
+				gameArray[6]="o";
+			}
 			displayTable(gameArray);
 		}
 	}
@@ -354,8 +369,23 @@ function playAsO(){
 		random_start=Math.floor((Math.random() * 2) + 1);
 		if(random_start==1)
 		{	
-			tile_choice=Math.floor((Math.random() * 9) + 1)-1;
-			gameArray[tile_choice]="x";
+			ran = Math.floor((Math.random() * 4) + 1);
+			if(ran==1)
+			{
+				gameArray[2]="x";
+			}
+			else if(ran==2)
+			{
+				gameArray[0]="x";
+			}
+			else if(ran==2)
+			{
+				gameArray[8]="x";
+			}
+			else
+			{
+				gameArray[6]="x";
+			}
 			displayTable(gameArray);
 		}
 	}
@@ -363,7 +393,195 @@ function playAsO(){
 //TODO::!!!!
 function do_best_move()
 {	
+	// if 2 rows or cols or diag WIN
+	// for tile 1
+	if((gameArray[1]==computer_choice && gameArray[2]==computer_choice) || (gameArray[3]==computer_choice && gameArray[6]==computer_choice) || (gameArray[8]==computer_choice && gameArray[4]==computer_choice)) 
+	{
+		if(isSpotAvailable(0))
+		{
+			return 0;
+		}
+	}
+	// for tile 2
+	if((gameArray[0]==computer_choice && gameArray[2]==computer_choice) || (gameArray[4]==computer_choice && gameArray[7]==computer_choice)) 
+	{
+		if(isSpotAvailable(1))
+		{
+			return 1;
+		}
+	}
+	// for tile 3
+	if((gameArray[0]==computer_choice && gameArray[1]==computer_choice) || (gameArray[5]==computer_choice && gameArray[8]==computer_choice) || (gameArray[6]==computer_choice && gameArray[4]==computer_choice)) 
+	{
+		if(isSpotAvailable(2))
+		{
+			return 2;
+		}
+	}
+	// for tile 4
+	if((gameArray[0]==computer_choice && gameArray[6]==computer_choice) || (gameArray[4]==computer_choice && gameArray[5]==computer_choice)) 
+	{
+		if(isSpotAvailable(3))
+		{
+			return 3;
+		}
+	}
+	// for tile 5
+	if((gameArray[0]==computer_choice && gameArray[8]==computer_choice) || (gameArray[6]==computer_choice && gameArray[2]==computer_choice) || (gameArray[1]==computer_choice && gameArray[7]==computer_choice) || (gameArray[3]==computer_choice && gameArray[5]==computer_choice)) 
+	{
+		if(isSpotAvailable(4))
+		{
+			return 4;
+		}
+	}
+	// for tile 6
+	if((gameArray[4]==computer_choice && gameArray[3]==computer_choice) || (gameArray[2]==computer_choice && gameArray[8]==computer_choice)) 
+	{
+		if(isSpotAvailable(5))
+		{
+			return 5;
+		}
+	}
+	// for tile 7
+	if((gameArray[7]==computer_choice && gameArray[8]==computer_choice) || (gameArray[0]==computer_choice && gameArray[3]==computer_choice) || (gameArray[4]==computer_choice && gameArray[2]==computer_choice)) 
+	{
+		if(isSpotAvailable(6))
+		{
+			return 6;
+		}
+	}
+	// for tile 8
+	if((gameArray[6]==computer_choice && gameArray[8]==computer_choice) || (gameArray[4]==computer_choice && gameArray[1]==computer_choice)) 
+	{
+		if(isSpotAvailable(7))
+		{
+			return 7;
+		}
+	}
+	// for tile 9
+	if((gameArray[6]==computer_choice && gameArray[7]==computer_choice) || (gameArray[2]==computer_choice && gameArray[5]==computer_choice) || (gameArray[4]==computer_choice && gameArray[0]==computer_choice)) 
+	{
+		if(isSpotAvailable(8))
+		{
+			return 8;
+		}
+	}
 
+	// BLOCK FORK !!!!
+	if(gameArray[4]==computer_choice)
+	{
+		if((gameArray[0]==playerchoice && gameArray[8]==playerchoice) || (gameArray[2]==playerchoice && gameArray[6]==playerchoice)) 
+		{
+			ran = Math.floor((Math.random() * 4) + 1);
+			if(ran==1)
+			{
+				if(isSpotAvailable(1))
+				{
+					return 1;
+				}
+			}
+			else if(ran==2)
+			{
+				if(isSpotAvailable(7))
+				{
+					return 7;
+				}
+			}
+			else if(ran==2)
+			{
+				if(isSpotAvailable(3))
+				{
+					return 3;
+				}
+			}
+			else
+			{
+				if(isSpotAvailable(5))
+				{
+					return 5;
+				}
+			}
+		}
+	}
+	
+
+	// if 2 rows or cols or diag BLOCK
+	// for tile 1
+	if((gameArray[1]==playerchoice && gameArray[2]==playerchoice) || (gameArray[3]==playerchoice && gameArray[6]==playerchoice) || (gameArray[8]==playerchoice && gameArray[4]==playerchoice)) 
+	{
+		if(isSpotAvailable(0))
+		{
+			return 0;
+		}
+	}
+	// for tile 2
+	if((gameArray[0]==playerchoice && gameArray[2]==playerchoice) || (gameArray[4]==playerchoice && gameArray[7]==playerchoice)) 
+	{
+		if(isSpotAvailable(1))
+		{
+			return 1;
+		}
+	}
+	// for tile 3
+	if((gameArray[0]==playerchoice && gameArray[1]==playerchoice) || (gameArray[5]==playerchoice && gameArray[8]==playerchoice) || (gameArray[6]==playerchoice && gameArray[4]==playerchoice)) 
+	{
+		if(isSpotAvailable(2))
+		{
+			return 2;
+		}
+	}
+	// for tile 4
+	if((gameArray[0]==playerchoice && gameArray[6]==playerchoice) || (gameArray[4]==playerchoice && gameArray[5]==playerchoice)) 
+	{
+		if(isSpotAvailable(3))
+		{
+			return 3;
+		}
+	}
+	// for tile 5
+	if((gameArray[0]==playerchoice && gameArray[8]==playerchoice) || (gameArray[6]==playerchoice && gameArray[2]==playerchoice) || (gameArray[1]==playerchoice && gameArray[7]==playerchoice) || (gameArray[3]==playerchoice && gameArray[5]==playerchoice)) 
+	{
+		if(isSpotAvailable(4))
+		{
+			return 4;
+		}
+	}
+	// for tile 6
+	if((gameArray[4]==playerchoice && gameArray[3]==playerchoice) || (gameArray[2]==playerchoice && gameArray[8]==playerchoice)) 
+	{
+		if(isSpotAvailable(5))
+		{
+			return 5;
+		}
+	}
+	// for tile 7
+	if((gameArray[7]==playerchoice && gameArray[8]==playerchoice) || (gameArray[0]==playerchoice && gameArray[3]==playerchoice) || (gameArray[4]==playerchoice && gameArray[2]==playerchoice)) 
+	{
+		if(isSpotAvailable(6))
+		{
+			return 6;
+		}
+	}
+	// for tile 8
+	if((gameArray[6]==playerchoice && gameArray[8]==playerchoice) || (gameArray[4]==playerchoice && gameArray[1]==playerchoice)) 
+	{
+		if(isSpotAvailable(7))
+		{
+			return 7;
+		}
+	}
+	// for tile 9
+	if((gameArray[6]==playerchoice && gameArray[7]==playerchoice) || (gameArray[2]==playerchoice && gameArray[5]==playerchoice) || (gameArray[4]==playerchoice && gameArray[0]==playerchoice)) 
+	{
+		if(isSpotAvailable(8))
+		{
+			return 8;
+		}
+	}
+
+
+
+	// human choose center / computer plays corners
 	if(gameArray.join("")=="____"+playerchoice+"____")
 	{
 		ran = Math.floor((Math.random() * 4) + 1);
@@ -384,8 +602,14 @@ function do_best_move()
 			return 6;
 		}
 	}
+	// player choose sides so normaly we should fork?? but no just play center
 	else if(gameArray.join("")==playerchoice+"________" || gameArray.join("")=="_"+playerchoice+"_______" || 
-	gameArray.join("")=="__"+playerchoice+"______" || )
+	gameArray.join("")=="__"+playerchoice+"______" || gameArray.join("")=="___"+playerchoice+"_____" ||
+	gameArray.join("")=="_____"+playerchoice+"___" || gameArray.join("")=="______"+playerchoice+"__" ||
+	gameArray.join("")=="_______"+playerchoice+"_" || gameArray.join("")=="________"+playerchoice)
+	{
+		return 4;
+	}
 	tile_choice=Math.floor((Math.random() * 9) + 1)-1;
 	while(!isSpotAvailable(tile_choice))
 	{
