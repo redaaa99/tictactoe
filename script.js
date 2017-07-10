@@ -504,6 +504,39 @@ function do_best_move()
 		}
 	}
 	
+	//block fork in case player had center and corner
+	if(gameArray[0]==computer_choice || gameArray[2]==computer_choice || gameArray[8]==computer_choice || gameArray[6]==computer_choice)
+	{
+		if(gameArray[0]==playerchoice && gameArray[4]==playerchoice) 
+		{
+			if(isSpotAvailable(2))
+			{
+				return 2;
+			}
+		}
+		if(gameArray[2]==playerchoice && gameArray[4]==playerchoice) 
+		{
+			if(isSpotAvailable(0))
+			{
+				return 0;
+			}
+		}
+		if(gameArray[6]==playerchoice && gameArray[4]==playerchoice) 
+		{
+			if(isSpotAvailable(8))
+			{
+				return 8;
+			}
+		}
+		if(gameArray[8]==playerchoice && gameArray[4]==playerchoice) 
+		{
+			if(isSpotAvailable(6))
+			{
+				return 6;
+			}
+		}
+
+	}
 
 	// if 2 rows or cols or diag BLOCK
 	// for tile 1
