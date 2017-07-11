@@ -287,6 +287,10 @@ function clearall()
     scorex=0;
     scoreo=0;
     gameArray=["_","_","_","_","_","_","_","_","_"];
+    if(choice=="one")
+      {
+        play();
+      }
     displayScore();
 }
 
@@ -467,78 +471,8 @@ function do_best_move()
 		}
 	}
 
-	// BLOCK FORK !!!!
-	if(gameArray[4]==computer_choice)
-	{
-		if((gameArray[0]==playerchoice && gameArray[8]==playerchoice) || (gameArray[2]==playerchoice && gameArray[6]==playerchoice)) 
-		{
-			ran = Math.floor((Math.random() * 4) + 1);
-			if(ran==1)
-			{
-				if(isSpotAvailable(1))
-				{
-					return 1;
-				}
-			}
-			else if(ran==2)
-			{
-				if(isSpotAvailable(7))
-				{
-					return 7;
-				}
-			}
-			else if(ran==2)
-			{
-				if(isSpotAvailable(3))
-				{
-					return 3;
-				}
-			}
-			else
-			{
-				if(isSpotAvailable(5))
-				{
-					return 5;
-				}
-			}
-		}
-	}
-	
-	//block fork in case player had center and corner
-	if(gameArray[0]==computer_choice || gameArray[2]==computer_choice || gameArray[8]==computer_choice || gameArray[6]==computer_choice)
-	{
-		if(gameArray[0]==playerchoice && gameArray[4]==playerchoice) 
-		{
-			if(isSpotAvailable(2))
-			{
-				return 2;
-			}
-		}
-		if(gameArray[2]==playerchoice && gameArray[4]==playerchoice) 
-		{
-			if(isSpotAvailable(0))
-			{
-				return 0;
-			}
-		}
-		if(gameArray[6]==playerchoice && gameArray[4]==playerchoice) 
-		{
-			if(isSpotAvailable(8))
-			{
-				return 8;
-			}
-		}
-		if(gameArray[8]==playerchoice && gameArray[4]==playerchoice) 
-		{
-			if(isSpotAvailable(6))
-			{
-				return 6;
-			}
-		}
-
-	}
-
-	// if 2 rows or cols or diag BLOCK
+  
+  // if 2 rows or cols or diag BLOCK
 	// for tile 1
 	if((gameArray[1]==playerchoice && gameArray[2]==playerchoice) || (gameArray[3]==playerchoice && gameArray[6]==playerchoice) || (gameArray[8]==playerchoice && gameArray[4]==playerchoice)) 
 	{
@@ -612,6 +546,83 @@ function do_best_move()
 		}
 	}
 
+  
+  
+  
+	// BLOCK FORK !!!!
+	if(gameArray[4]==computer_choice)
+	{
+		if((gameArray[0]==playerchoice && gameArray[8]==playerchoice) || (gameArray[2]==playerchoice && gameArray[6]==playerchoice)) 
+		{
+			ran = Math.floor((Math.random() * 4) + 1);
+			if(ran==1)
+			{
+				if(isSpotAvailable(1))
+				{
+					return 1;
+				}
+			}
+			else if(ran==2)
+			{
+				if(isSpotAvailable(7))
+				{
+					return 7;
+				}
+			}
+			else if(ran==2)
+			{
+				if(isSpotAvailable(3))
+				{
+					return 3;
+				}
+			}
+			else
+			{
+				if(isSpotAvailable(5))
+				{
+					return 5;
+				}
+			}
+		}
+	}
+	
+	
+
+	
+	//block fork in case player had center and corner
+	if(gameArray[0]==computer_choice || gameArray[2]==computer_choice || gameArray[8]==computer_choice || gameArray[6]==computer_choice)
+	{
+		if(gameArray[0]==playerchoice && gameArray[4]==playerchoice) 
+		{
+			if(isSpotAvailable(2))
+			{
+				return 2;
+			}
+		}
+		if(gameArray[2]==playerchoice && gameArray[4]==playerchoice) 
+		{
+			if(isSpotAvailable(0))
+			{
+				return 0;
+			}
+		}
+		if(gameArray[6]==playerchoice && gameArray[4]==playerchoice) 
+		{
+			if(isSpotAvailable(8))
+			{
+				return 8;
+			}
+		}
+		if(gameArray[8]==playerchoice && gameArray[4]==playerchoice) 
+		{
+			if(isSpotAvailable(6))
+			{
+				return 6;
+			}
+		}
+
+	}
+
 
 
 	// human choose center / computer plays corners
@@ -662,8 +673,28 @@ function play(){
 				
 				if(random_start==1)
 				{	
-					tile_choice=Math.floor((Math.random() * 9) + 1)-1;
-					gameArray[4]="x";
+					tile_choice=Math.floor((Math.random() * 5) + 1);
+          if(tile_choice==1)
+            {
+              gameArray[4]="x";
+            }
+          if(tile_choice==2)
+            {
+              gameArray[0]="x";
+            }
+          if(tile_choice==3)
+            {
+              gameArray[2]="x";
+            }
+          if(tile_choice==4)
+            {
+              gameArray[8]="x";
+            }
+          if(tile_choice==5)
+            {
+              gameArray[6]="x";
+            }
+					
 					displayTable(gameArray);
 				}
 			}
@@ -673,7 +704,28 @@ function play(){
 				if(random_start==1)
 				{	
 					tile_choice=Math.floor((Math.random() * 9) + 1)-1;
-					gameArray[4]="o";
+					tile_choice=Math.floor((Math.random() * 5) + 1);
+          if(tile_choice==1)
+            {
+              gameArray[4]="o";
+            }
+          if(tile_choice==2)
+            {
+              gameArray[0]="o";
+            }
+          if(tile_choice==3)
+            {
+              gameArray[2]="o";
+            }
+          if(tile_choice==4)
+            {
+              gameArray[8]="o";
+            }
+          if(tile_choice==5)
+            {
+              gameArray[6]="x";
+            }
+					
 					displayTable(gameArray);
 				}
 			}
